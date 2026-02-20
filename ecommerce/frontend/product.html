@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Product</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <a href="index.html">⬅ Back</a>
+
+    <div id="product"></div>
+
+    <script>
+      const API = "http://localhost:5000/api";
+      const id = new URLSearchParams(window.location.search).get("id");
+
+      fetch(`${API}/products/${id}`)
+        .then((res) => res.json())
+        .then((p) => {
+          document.getElementById("product").innerHTML = `
+      <h2>${p.name}</h2>
+      <p>${p.description}</p>
+      <h3>$${p.price}</h3>
+      <button onclick='addToCart(${JSON.stringify(p)})'>Add to Cart</button>
+    `;
+        });
+
+      function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Added to cart");
+      }
+    </script>
+  </body>
+</html>
