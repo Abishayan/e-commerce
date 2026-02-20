@@ -24,3 +24,8 @@ button {
   margin-top: 10px;
   cursor: pointer;
 }
+button {
+  padding: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
